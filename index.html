@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Saussure、Semiotics 與 Humpty Dumpty 的 25 題英文選擇題練習。">
+  <title>Linguistics Quiz — 25 Questions</title>
+  <style>
+    /* Paper exam theme: ink, white stock, understated rules, and generous margins. */
+    :root{color-scheme:light;--bg:#fff;--panel:#fff;--sub:#f5f5f5;--stroke:#c7c7c7;--text:#111;--muted:#555;--accent:#161616;--good:#181818;--bad:#181818}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font:16px/1.65 Georgia,"Times New Roman","Noto Serif TC","PMingLiU",serif}
+    button,input{font:inherit}
+    button{cursor:pointer;touch-action:manipulation}
+    button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    button:disabled{cursor:default}
+    .shell{max-width:850px;margin:0 auto;padding:30px 20px 70px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0 18px;border-bottom:3px double #161616}
+    .brand{font-size:16px;font-weight:800;letter-spacing:.06em}
+    .brand span{color:var(--text)}
+    .header-meta{color:var(--muted);font-size:11px;text-align:right;letter-spacing:.03em}
+    .panel{border:1px solid #222;background:var(--panel);border-radius:0;padding:38px 44px;margin-top:26px;box-shadow:none}
+    .eyebrow{font-size:12px;color:var(--text);font-weight:700;letter-spacing:.075em;text-transform:uppercase}
+    h1,h2,h3,p{margin-top:0}
+    h1{font-size:clamp(28px,4.5vw,40px);line-height:1.25;letter-spacing:-.015em;margin:14px 0 16px}
+    h2{font-size:23px;line-height:1.4;margin:0}
+    h3{font-size:17px;line-height:1.5;margin:0}
+    .lead{color:var(--muted);max-width:620px;margin:0 0 24px;font-size:15px}
+    .metrics{display:flex;flex-wrap:wrap;gap:8px;margin:19px 0 27px}
+    .chip{border:1px solid var(--stroke);border-radius:0;padding:5px 10px;color:var(--text);font-size:12px}
+    .mode-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}
+    .mode-card{display:flex;text-align:left;flex-direction:column;gap:7px;background:#fff;border:1px solid #777;border-radius:0;color:var(--text);padding:20px;transition:background .15s,border-color .15s}
+    .mode-card:hover,.choice:hover:not(:disabled){background:#f4f4f4;border-color:#111}
+    .mode-card strong{font-size:19px}
+    .mode-card small{font-size:13px;color:var(--muted);line-height:1.7}
+    .mode-card b{color:var(--text);margin-top:9px;font-size:13px;text-decoration:underline;text-underline-offset:3px}
+    .prefs{display:flex;gap:10px;align-items:center;color:var(--text);font-size:14px;margin-top:16px}
+    .prefs input{accent-color:#111;width:17px;height:17px}
+    .note{font-size:12px;color:var(--muted);margin-top:22px;line-height:1.7}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .row.wrap{flex-wrap:wrap}
+    .muted{color:var(--muted)}
+    .small{font-size:12px}
+    .pill{display:inline-block;border:1px solid var(--stroke);padding:4px 10px;border-radius:0;font-size:12px;color:var(--text)}
+    .progress-track{width:100%;height:5px;border:1px solid #111;background:#fff;overflow:hidden;margin-top:16px}
+    .progress-fill{height:100%;background:#111;transition:width .2s}
+    .question{font-size:clamp(18px,2.35vw,22px);line-height:1.55;font-weight:700;margin:30px 0 21px;overflow-wrap:anywhere}
+    .choices{display:grid;gap:5px}
+    .choice{display:flex;align-items:flex-start;gap:14px;width:100%;padding:13px 14px;text-align:left;border:1px solid transparent;border-bottom-color:#ddd;border-radius:0;background:#fff;color:var(--text);line-height:1.55;transition:border-color .15s,background .15s;overflow-wrap:anywhere}
+    .choice:disabled{opacity:1}
+    .choice .letter{flex:0 0 29px;width:29px;height:29px;padding:0;border:1px solid #666;border-radius:50%;color:#111;font-size:13px;font-weight:700;line-height:27px;text-align:center}
+    .choice.selected{border-color:#111;background:#f2f2f2}
+    .choice.selected .letter{background:#111;border-color:#111;color:#fff}
+    .choice.correct{border:2px solid #111;background:#f5f5f5;padding:12px 13px}
+    .choice.wrong{border:1px dashed #111;background:#fff}
+    .choice.correct .letter{background:#111;border-color:#111;color:#fff}
+    .choice.wrong .letter{color:#111;text-decoration:line-through}
+    .feedback{border:1px solid #111;background:#fff;border-radius:0;padding:16px 18px;margin-top:20px}
+    .feedback strong{display:block;margin-bottom:6px}
+    .feedback.good strong,.feedback.bad strong{color:var(--text)}
+    .feedback p{margin:0;font-size:14px;overflow-wrap:anywhere}
+    .actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:26px;flex-wrap:wrap}
+    .btn{border:1px solid #555;border-radius:0;background:#fff;padding:10px 18px;color:var(--text);font-size:14px;font-weight:700;min-height:44px}
+    .btn:hover:not(:disabled){border-color:#111;background:#ededed}
+    .btn.primary{background:#111;color:#fff;border-color:#111}
+    .btn.primary:hover:not(:disabled){background:#343434}
+    .btn.danger{color:var(--text)}
+    .btn:disabled{opacity:.38}
+    .grid-hint{color:var(--muted);font-size:12px;margin:28px 0 11px}
+    .number-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:7px}
+    .num{min-height:36px;min-width:0;border-radius:0;border:1px solid #999;background:#fff;color:var(--text);font-size:13px;padding:0}
+    .num.answered{color:#111;background:#eee;border-color:#555}
+    .num.current{background:#111;border-color:#111;color:#fff;font-weight:800}
+    .score{font-size:clamp(58px,12vw,98px);font-weight:800;line-height:1.1;letter-spacing:-.04em;margin:12px 0}
+    .score small{font-size:25px;letter-spacing:0;color:var(--muted)}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:24px}
+    .stat{background:#fff;border:1px solid #aaa;border-radius:0;padding:14px;text-align:center}
+    .stat b{display:block;font-size:25px}
+    .stat span{font-size:12px;color:var(--muted)}
+    .results-actions{display:flex;flex-wrap:wrap;gap:10px;margin:23px 0}
+    .review-list{display:grid;gap:11px;margin-top:20px}
+    .review{background:#fff;border:1px solid #aaa;border-radius:0;padding:17px}
+    .review h3{margin:7px 0 10px;font-weight:600}
+    .review p{margin:5px 0;font-size:13px;overflow-wrap:anywhere}
+    .good-text,.bad-text{color:var(--text)}
+    .divider{border:0;border-top:1px solid #aaa;margin:24px 0}
+    .hidden{display:none!important}
+    footer{text-align:center;font-size:12px;color:var(--muted);padding:20px 0 0}
+    @media (max-width:600px){.shell{padding:13px 12px 45px}.panel{padding:24px 17px;margin-top:17px}.mode-grid{grid-template-columns:1fr}.number-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.actions .btn{flex:1}.results-actions .btn{flex:1 1 100%}.question{margin-top:24px}.brand{letter-spacing:0}header{padding-bottom:15px}.choice{gap:11px;padding:12px 8px}.choice.correct{padding:11px 7px}}
+    @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="shell" id="app">
+    <header><div class="brand">LINGUISTICS <span>/ QUIZ</span></div><div class="header-meta">SAUSSURE · SEMIOTICS · LANGUAGE</div></header>
+    <section class="panel" id="content" aria-live="polite"></section>
+    <footer>25 questions · Your progress stays in this browser.</footer>
+  </main>
+  <script>
+  'use strict';
+  const QUESTIONS = [
+    {id:1,q:`What is the title of the book that was posthumously compiled from Saussure’s lectures and published in 1916?`,o:[`Introduction to Linguistics`,`The Language Instinct`,`Course in General Linguistics`,`Principles of Semantics`],a:'C'},
+    {id:2,q:`Which university did Ferdinand de Saussure lecture at between 1907 and 1911?`,o:[`University of Zurich`,`University of Paris`,`University of Geneva`,`University of Lausanne`],a:'C'},
+    {id:3,q:`Who is considered one of the founding figures in the fields of structuralism and semiotics/semiology?`,o:[`Noam Chomsky`,`Ferdinand de Saussure`,`Sigmund Freud`,`Roland Barthes`],a:'B'},
+    {id:4,q:`What does Saussure mean by saying the relationship between the signifier and the signified is "arbitrary"?`,o:[`Individual speakers can create their own language.`,`There is no natural or inherent link between the signifier and the signified. Instead, the relationship between the signifier and the signified follows conventions.`,`Language is random and chaotic in nature.`,`The signifier and the signified are always the same in every language.`],a:'B'},
+    {id:5,q:`Which of the following describes the triangular relationship in Saussure’s model of the sign?`,o:[`Syntax, Semantics, Phonology`,`Signifier, Signified, Object/Event`,`Grammar, Vocabulary, Context`,`Speech, Writing, Culture`],a:'B'},
+    {id:6,q:`What does the “Signified” represent in Saussure's semiotic theory?`,o:[`The written or spoken form of language`,`The mental concept or image of an object or event`,`The grammatical structure of a sentence`,`The sound associated with a word`],a:'B'},
+    {id:7,q:`Which of the following best defines the “Signifier” in Saussure's theory?`,o:[`The mental concept of an object`,`The written or spoken form of language`,`The physical object being referred to`,`The cultural context of a word`],a:'B'},
+    {id:8,q:`According to Saussure, what are the two parts of a sign?`,o:[`Object and Behavior`,`Signifier and Signified`,`Language and Grammar`,`Speaker and Listener`],a:'B'},
+    {id:9,q:`What is the main focus of semiotics/semiology?`,o:[`The structure of grammar`,`The relationship between speech and writing`,`The study of signs and the ways in which they convey meaning`,`The history of language development`],a:'C'},
+    {id:10,q:`Which of the following statements best summarizes Saussure’s view of language?`,o:[`Language is an unmediated reflection of reality.`,`Language is a system of representation that constructs meaning through signifiers and signifieds and shapes our understanding of the world.`,`Language is a fixed system with no room for change.`],a:'B'},
+    {id:11,q:`According to Humpty Dumpty's understanding, what role does he think he has over his speech?`,o:[`He has no control over how people interpret his speech`,`He has complete control over his speech and its meaning`,`He thinks words change meaning on their own`,`He believes his speech is controlled by others`],a:'B'},
+    {id:12,q:`What does Humpty Dumpty believe about the relationship between what he says and what he means?`,o:[`There is always a hidden meaning behind his words`,`His words perfectly match the ideas he wants to convey`,`His speech often confuses the listener`,`He believes language is inherently ambiguous`],a:'B'},
+    {id:13,q:`Which of the following is an example of a rhetorical question?`,o:[`How many continents are there?`,`Can you tell me where the nearest grocery store is?`,`What time is the meeting today?`,`Isn’t Taiwan an important member of the international community?`],a:'D'},
+    {id:14,q:`What is the purpose of a rhetorical question?`,o:[`To make a point gently`,`To get a detailed answer from someone`,`To confuse the listener`,`To ask for factual information`],a:'A'},
+    {id:15,q:`What concern does Alice express when talking to Humpty Dumpty?`,o:[`That Humpty Dumpty doesn't like riddles`,`That he doesn’t know how to answer questions`,`That he would be safer on the ground`,`That he is upset and angry`],a:'C'},
+    {id:16,q:`What is/are the possible meaning(s) for Alice’s question, “Why do you sit out here all alone?”`,o:[`She is curious why he prefers solitude.`,`She thinks Humpty Dumpty needs company.`,`She is implying that he might be lonely.`,`She is trying to understand his unusual behavior.`,`All the above`],a:'E'},
+    {id:17,q:`Why does Humpty Dumpty say he is sitting alone?`,o:[`Because he enjoys solitude`,`Because there’s nobody with him`,`Because Alice left him there`,`Because he was waiting for someone`],a:'B'},
+    {id:18,q:`In Saussure’s framework of semiotics, a person's name can be considered a signifier. What does the last name indicate?`,o:[`The person's hobbies`,`The person’s place in their family genealogy`,`The person's age`,`The person's favorite color`],a:'B'},
+    {id:19,q:`What is in a name as a unique signifier?`,o:[`It distinguishes a person from others.`,`It connects an individual to their ancestors and heritage.`,`It often reflects the hopes or intentions of the parents.`,`It shapes the impressions and assumptions others may form about a person.`,`A and B are correct.`,`A and C are correct.`,`A and D are correct.`,`A, B and C are correct.`,`B and C are correct.`,`B and D are correct.`,`B, C and D are correct.`,`C and D are correct.`,`A, B, C and D are correct.`],a:'M'},
+    {id:20,q:`According to Saussure, the relationship between the signifier and the signified is “arbitrary.” How is the meaning of a sign constructed?`,o:[`Through individual interpretation of each word`,`By an inherent link between words and objects`,`Through social convention and consensus about the relationship between the signifier and the signified within a speech community`,`By using gestures and non-verbal communication`],a:'C'},
+    {id:21,q:`In the phrase "I beg your pardon," what is the difference between the surface/literal meaning and the conventionalized meaning?`,o:[`The surface meaning is an apology, while the conventionalized meaning is an expression of confusion.`,`The surface meaning is a polite request, while the conventionalized meaning is an expression of offense.`,`The surface meaning is a demand for forgiveness, while the conventionalized meaning is a greeting.`,`The surface meaning is confusion, while the conventionalized meaning is to ask for a favor.`],a:'A'},
+    {id:22,q:`Humpty Dumpty’s view of language suggests that he is committed to which level of communication?`,o:[`The hidden meaning behind language`,`The ambiguity of language`,`The surface/literal level of linguistic communication`,`The symbolic nature of language`],a:'C'},
+    {id:23,q:`What does Humpty Dumpty mean by an "un-birthday present"?`,o:[`A present given when it is your birthday.`,`A present given when it isn’t your birthday.`,`A present given when it’s someone else’s birthday.`,`A present that is given for no reason at all.`],a:'B'},
+    {id:24,q:`Why is the term "un-birthday present" an example of how words are not coined randomly?`,o:[`It follows a strict linguistic rule that governs word formation.`,`It combines familiar concepts (“un” and “birthday”) but lacks a commonly accepted meaning in everyday language. The signifier “un-birthday present” does not cohere with a conventionalized signified.`,`It is universally recognized and understood in the same way by all speakers.`,`It uses common vocabulary but strictly adheres to grammatical conventions.`],a:'B'},
+    {id:25,q:`Why does Alice say "I mean" in her response to Humpty Dumpty?`,o:[`She wants to apologize for interrupting Humpty Dumpty.`,`She is clarifying her question because her initial statement might have been misunderstood.`,`She is trying to explain the meaning of the word "un-birthday."`,`She is agreeing with Humpty Dumpty's explanation.`],a:'B'}
+  ];
+  const QMAP = new Map(QUESTIONS.map(q=>[q.id,q]));
+  const LETTERS = 'ABCDEFGHIJKLM';
+  const STORAGE_KEY = 'linguistics-quiz-v1';
+  const DEFAULT = () => ({view:'home',mode:'exam',ids:[],i:0,answers:{},shuffle:true,review:false,source:'all',savedView:null});
+  let state = DEFAULT();
+  function safe(text){return String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}}
+  function load(){
+    try{
+      const old=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');
+      if(old && ['home','quiz','results'].includes(old.view) && ['exam','practice'].includes(old.mode) && Array.isArray(old.ids) && old.ids.every(id=>QMAP.has(id)) && new Set(old.ids).size===old.ids.length && old.ids.length<=25 && Number.isInteger(old.i) && old.i>=0 && old.i<Math.max(1,old.ids.length) && old.answers && typeof old.answers==='object'){
+        state={...DEFAULT(),...old};
+      }
+    }catch(e){}
+  }
+  function randomize(arr){const out=arr.slice();for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;}
+  function start(mode,ids=null){
+    if((state.view==='quiz'||state.view==='home') && Object.keys(state.answers).length && !window.confirm('開始新測驗會取代目前的作答紀錄，確定繼續？'))return;
+    const base=ids||QUESTIONS.map(q=>q.id);
+    state={...DEFAULT(),view:'quiz',mode,ids:state.shuffle?randomize(base):base.slice(),shuffle:state.shuffle,source:ids?'mistakes':'all'};
+    save();render();scrollToTop();
+  }
+  function answered(){return state.ids.filter(id=>Boolean(state.answers[id])).length;}
+  function correct(){return state.ids.filter(id=>state.answers[id]===QMAP.get(id).a).length;}
+  function wrongIds(){return state.ids.filter(id=>state.answers[id]!==QMAP.get(id).a);}
+  function currentQuestion(){return QMAP.get(state.ids[state.i]);}
+  function pick(value){
+    if(state.view!=='quiz')return;
+    const q=currentQuestion();
+    if(!LETTERS.slice(0,q.o.length).includes(value))return;
+    if(state.mode==='practice'&&state.answers[q.id])return;
+    state.answers[q.id]=value;save();render();
+  }
+  function finish(){
+    if(state.view!=='quiz')return;
+    const remain=state.ids.length-answered();
+    if(remain && !window.confirm(`還有 ${remain} 題未作答。未作答題目會計為答錯，確定交卷？`))return;
+    state.view='results';state.review=false;save();render();scrollToTop();
+  }
+  function navigate(n){if(n<0||n>=state.ids.length)return;state.i=n;save();render();scrollToTop();}
+  function backHome(){if(state.view==='quiz' && answered()>0 && !window.confirm('返回首頁將保留作答進度，可以稍後繼續。確定返回？'))return;state.savedView=state.view;state.view='home';save();render();scrollToTop();}
+  function scrollToTop(){window.scrollTo({top:0,behavior:'instant'});}
+  function render(){
+    const el=document.getElementById('content');
+    if(state.view==='home')el.innerHTML=homeHTML();
+    else if(state.view==='quiz')el.innerHTML=quizHTML();
+    else el.innerHTML=resultsHTML();
+  }
+  function homeHTML(){
+    const resume=state.ids.length>0;
+    return `<div class="eyebrow">Interactive multiple-choice quiz</div>
+      <h1>How well do you know<br>language and signs?</h1>
+      <p class="lead">25 題英文選擇題，涵蓋 Saussure、semiotics 和 Humpty Dumpty。直接在瀏覽器作答，不需要登入。</p>
+      <div class="metrics"><span class="chip">25 Questions</span><span class="chip">English</span><span class="chip">Free to play</span><span class="chip">No sign-in</span></div>
+      ${resume?`<button class="btn primary" data-action="resume" style="width:100%">${state.savedView==='results'?'查看上次成績':'繼續上次測驗'}（${answered()} / ${state.ids.length} 已答）</button><hr class="divider">`:''}
+      <h2>選擇練習模式</h2>
+      <div class="mode-grid">
+        <button class="mode-card" data-action="start-exam"><strong>模擬考試</strong><small>答題時不顯示答案。交卷後統計分數，並查看錯題。</small><b>開始考試 →</b></button>
+        <button class="mode-card" data-action="start-practice"><strong>即時練習</strong><small>每題選完立即顯示對錯與正確答案，適合邊做邊學。</small><b>開始練習 →</b></button>
+      </div>
+      <label class="prefs"><input type="checkbox" id="shuffle" ${state.shuffle?'checked':''}> 每次打亂題目順序</label>
+      <p class="note">題目與答案採用提供的原始題庫。分數與作答紀錄只保存在此瀏覽器，朋友之間互不影響。</p>`;
+  }
+  function quizHTML(){
+    const q=currentQuestion(), selected=state.answers[q.id]||'', n=answered(), progress=Math.round(100*n/state.ids.length);
+    const show=state.mode==='practice' && Boolean(selected);
+    const choices=q.o.map((v,i)=>{
+      const letter=LETTERS[i];
+      let className='choice';
+      if(show){if(letter===q.a)className+=' correct';else if(letter===selected)className+=' wrong';}
+      else if(letter===selected)className+=' selected';
+      return `<button type="button" class="${className}" data-action="pick" data-value="${letter}" aria-pressed="${letter===selected}" ${show?'disabled':''}><span class="letter">${letter}.</span><span>${safe(v)}</span></button>`;
+    }).join('');
+    const feedback=show?`<div class="feedback ${selected===q.a?'good':'bad'}" role="status"><strong>${selected===q.a?'答對了！':'答錯了。'}</strong><p>正確答案：${q.a}. ${safe(q.o[LETTERS.indexOf(q.a)])}</p></div>`:'';
+    const numBtns=state.ids.map((id,i)=>{
+      const c=['num'];if(i===state.i)c.push('current');else if(state.answers[id])c.push('answered');
+      return `<button type="button" class="${c.join(' ')}" data-action="jump" data-index="${i}" aria-label="第 ${i+1} 題${state.answers[id]?'，已作答':''}" ${i===state.i?'aria-current="step"':''}>${i+1}</button>`;
+    }).join('');
+    return `<div class="row wrap"><div><div class="eyebrow">${state.mode==='exam'?'模擬考試':'即時練習'}${state.source==='mistakes'?' / 錯題重練':''}</div><h2>Question ${state.i+1} <span class="muted">/ ${state.ids.length}</span></h2></div><button class="btn" data-action="home">返回首頁</button></div>
+      <div class="row small muted" style="margin-top:15px"><span>已作答 ${n} / ${state.ids.length}</span><span>${progress}%</span></div>
+      <div class="progress-track" role="progressbar" aria-valuenow="${n}" aria-valuemin="0" aria-valuemax="${state.ids.length}" aria-label="答題進度"><div class="progress-fill" style="width:${progress}%"></div></div>
+      <div class="question">${safe(q.q)}</div>
+      <div class="choices" role="group" aria-label="選擇答案">${choices}</div>${feedback}
+      <div class="actions"><button class="btn" data-action="prev" ${state.i===0?'disabled':''}>← 上一題</button><button class="btn primary" data-action="${state.i===state.ids.length-1?'finish':'next'}">${state.i===state.ids.length-1?'交卷查看成績':'下一題 →'}</button></div>
+      <div class="grid-hint">題號導覽 · 深色代表已作答</div><div class="number-grid">${numBtns}</div>
+      <div class="actions"><span class="small muted">${state.mode==='exam'?'交卷前可以修改答案':'選擇答案後立即公布結果，不能修改'}</span><button class="btn" data-action="finish">交卷</button></div>`;
+  }
+  function reviewItem(id){
+    const q=QMAP.get(id), choice=state.answers[id]||'', ok=choice===q.a;
+    return `<article class="review"><span class="pill">原始題號 #${id}</span><h3>${safe(q.q)}</h3><p class="${ok?'good-text':'bad-text'}">你的答案：${choice?safe(choice+'. '+q.o[LETTERS.indexOf(choice)]):'未作答'}</p><p class="good-text">正確答案：${q.a}. ${safe(q.o[LETTERS.indexOf(q.a)])}</p></article>`;
+  }
+  function resultsHTML(){
+    const total=state.ids.length, good=correct(), missed=wrongIds(), count=answered(), pct=Math.round(100*good/total);
+    return `<div class="eyebrow">Quiz complete</div><h1>測驗結果</h1><p class="lead">${state.mode==='exam'?'模擬考試':'即時練習'}${state.source==='mistakes'?' · 錯題重練':''}</p>
+      <div class="score">${pct}<small>%</small></div><div class="progress-track"><div class="progress-fill" style="width:${pct}%;background:var(--good)"></div></div>
+      <div class="stats"><div class="stat"><b class="good-text">${good}</b><span>答對</span></div><div class="stat"><b class="bad-text">${total-good}</b><span>答錯 / 未作答</span></div><div class="stat"><b>${count}</b><span>已作答</span></div></div>
+      <div class="results-actions">${missed.length?`<button class="btn primary" data-action="retry-missed">錯題重練（${missed.length} 題）</button>`:''}<button class="btn" data-action="retry-all">全部 25 題再考一次</button><button class="btn" data-action="toggle-review">${state.review?'收起答案':'查看每題答案'}</button></div>
+      ${state.review?`<hr class="divider"><h2>逐題檢討</h2><p class="small muted" style="margin-top:6px">題目、個人答案與題庫正解</p><div class="review-list">${state.ids.map(reviewItem).join('')}</div>`:''}
+      <hr class="divider"><button class="btn" data-action="home">返回首頁</button>`;
+  }
+  document.getElementById('content').addEventListener('click',e=>{
+    const btn=e.target.closest('button[data-action]');if(!btn||btn.disabled)return;
+    const action=btn.dataset.action;
+    if(action==='resume'){state.view=state.savedView==='results'?'results':'quiz';save();render();}
+    else if(action==='start-exam')start('exam');
+    else if(action==='start-practice')start('practice');
+    else if(action==='pick')pick(btn.dataset.value);
+    else if(action==='prev')navigate(state.i-1);
+    else if(action==='next')navigate(state.i+1);
+    else if(action==='jump')navigate(Number(btn.dataset.index));
+    else if(action==='finish')finish();
+    else if(action==='home')backHome();
+    else if(action==='retry-missed'){const ids=wrongIds();state.view='results';start('practice',ids);}
+    else if(action==='retry-all'){state.view='results';start('exam');}
+    else if(action==='toggle-review'){state.review=!state.review;save();render();}
+  });
+  document.getElementById('content').addEventListener('change',e=>{if(e.target.id==='shuffle'){state.shuffle=e.target.checked;save();}});
+  load();
+  // Keep unfinished quizzes resumable without showing the answer key on the home screen.
+  if(state.view==='quiz' && state.ids.length===0)state=DEFAULT();
+  render();
+  </script>
+</body>
+</html>
